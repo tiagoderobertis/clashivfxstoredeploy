@@ -7,6 +7,7 @@ import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/componen
 import { CurrencySelector } from "@/components/store/currency-selector"
 import { useTranslation } from "@/lib/i18n/use-translation"
 import type { SkillLevel } from "@/types"
+import { FixedReviewCarousel } from "@/components/store/fixed-review-carousel"
 
 interface TrainingPackCardProps {
   setSkillLevel: (level: SkillLevel) => void
@@ -172,6 +173,7 @@ export function TrainingPackCard({ setSkillLevel }: TrainingPackCardProps) {
           </Card>
         </div>
       </div>
+      <FixedReviewCarousel />
     </div>
   )
 }

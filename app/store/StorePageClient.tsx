@@ -6,7 +6,7 @@ import { AdvancedPackCard } from "@/components/store/advanced-pack-card"
 import { NovicePackCard } from "@/components/store/novice-pack-card"
 import { TrainingPackCard } from "@/components/store/training-pack-card"
 import type { SkillLevel } from "@/types"
-import { ReviewCarousel } from "@/components/store/review-carousel"
+// Importaciones existentes
 
 export default function StorePageClient() {
   const [skillLevel, setSkillLevel] = useState<SkillLevel>(null)
@@ -37,7 +37,7 @@ export default function StorePageClient() {
               // Fallback a novice si por alguna razón no hay nivel seleccionado
               <NovicePackCard setSkillLevel={handleChangeSkillLevel} />
             )}
-            <ReviewCarousel />
+            {/* El carrusel ya está incluido en cada componente de pack */}
           </>
         )}
       </div>
