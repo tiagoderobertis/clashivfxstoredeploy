@@ -38,12 +38,14 @@ jobs:
             echo "out directory exists"
             ls -la out/
           else
-            echo "out directory does not exist, creating it"
-            mkdir -p out
-            echo "Created out directory"
+            echo "out directory does not exist"
+            if [ -d ".next" ]; then
+              echo ".next directory exists"
+              ls -la .next/
+            fi
           fi
 
-      - name: Prepare for GitHub Pages
+      - name: Create index.html in root
         run: |
           # Ensure out directory exists
           mkdir -p out
@@ -52,19 +54,133 @@ jobs:
           touch out/.nojekyll
           echo www.clashivfx.store > out/CNAME
 
-          # If build didn't generate index.html, create a basic one
-          if [ ! -f out/index.html ]; then
-            echo "<html><head><meta http-equiv='refresh' content='0;url=/'></head><body>Redirecting...</body></html>" > out/index.html
-          fi
+          # Create a proper index.html in the root
+          cat > out/index.html << 'EOL'
+          <!DOCTYPE html>
+          <html lang="es">
+          <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>ClashiVFX - Professional Video Effects</title>
+            <style>
+              body {
+                font-family: Arial, sans-serif;
+                margin: 0;
+                padding: 0;
+                background-color: #000;
+                color: #FFE8CD;
+              }
+              .container {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                min-height: 100vh;
+                padding: 20px;
+                text-align: center;
+              }
+              h1 {
+                font-size: 2.5rem;
+                margin-bottom: 1rem;
+                color: #FF7200;
+              }
+              p {
+                font-size: 1.2rem;
+                margin-bottom: 2rem;
+                max-width: 600px;
+              }
+              .button {
+                display: inline-block;
+                background-color: #FF7200;
+                color: #FFE8CD;
+                padding: 12px 24px;
+                border-radius: 6px;
+                text-decoration: none;
+                font-weight: bold;
+                transition: all 0.3s ease;
+              }
+              .button:hover {
+                background-color: #FFE8CD;
+                color: #000;
+                box-shadow: 0 0 15px rgba(255, 232, 205, 0.6);
+              }
+            </style>
+          </head>
+          <body>
+            <div class="container">
+              <h1>ClashiVFX</h1>
+              <p>Professional effects presets and plugins for After Effects. One-click application to enhance your videos.</p>
+              <a href="/home/" class="button">Enter Site</a>
+            </div>
+          </body>
+          </html>
+          EOL
 
-          # Create a 404 page
-          if [ ! -f out/404.html ]; then
-            echo "<html><head><title>404 - Page Not Found</title></head><body style='font-family: Arial, sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; background-color: #000; color: #FF7200;'><div style='text-align: center;'><h1>404 - Page Not Found</h1><p>The page you are looking for does not exist.</p><a href='/' style='color: #FF7200; text-decoration: underline;'>Go back to home</a></div></body></html>" > out/404.html
-          fi
+          # Create a proper 404.html
+          cat > out/404.html << 'EOL'
+          <!DOCTYPE html>
+          <html lang="es">
+          <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>404 - Página No Encontrada | ClashiVFX</title>
+            <style>
+              body {
+                font-family: Arial, sans-serif;
+                margin: 0;
+                padding: 0;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                min-height: 100vh;
+                background: linear-gradient(to bottom, #000000, #FF7200);
+                color: #FFE8CD;
+              }
+              .container {
+                text-align: center;
+                padding: 2rem;
+                max-width: 600px;
+              }
+              h1 {
+                font-size: 3rem;
+                margin-bottom: 1rem;
+              }
+              p {
+                font-size: 1.2rem;
+                margin-bottom: 2rem;
+                opacity: 0.8;
+              }
+              a {
+                display: inline-block;
+                background-color: #FF7200;
+                color: #FFE8CD;
+                padding: 0.75rem 1.5rem;
+                border-radius: 0.375rem;
+                text-decoration: none;
+                font-weight: bold;
+                transition: all 0.3s ease;
+              }
+              a:hover {
+                background-color: #FFE8CD;
+                color: #000;
+                box-shadow: 0 0 15px rgba(255, 232, 205, 0.6);
+              }
+            </style>
+          </head>
+          <body>
+            <div class="container">
+              <h1>404 - Página No Encontrada</h1>
+              <p>La página que estás buscando no existe o ha sido movida.</p>
+              <a href="/">Volver al Inicio</a>
+            </div>
+          </body>
+          </html>
+          EOL
 
-          # Copy build output if it's in a different location
-          if [ ! -d "out" ] && [ -d ".next" ]; then
-            cp -r .next/* out/
+          # Copy build output if it exists elsewhere
+          if [ -d ".next/static" ]; then
+            mkdir -p out/static
+            cp -r .next/static/* out/static/
           fi
 
           # List files for verification
