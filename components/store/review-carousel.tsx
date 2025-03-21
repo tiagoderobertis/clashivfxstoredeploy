@@ -114,7 +114,7 @@ export function ReviewCarousel() {
       if (isIOS) {
         // Obtener el estilo de transformación actual
         const currentTransform = carousel.style.transform || "translateX(0px)"
-        const currentX = Number.parseFloat(currentTransform.replace(/translateX$$(.*)px$$/, "$1") || "0")
+        const currentX = Number.parseFloat(currentTransform.replace(/translateX$$(.*?)px$$/, "$1") || "0")
 
         // Calcular nueva posición
         const newX = currentX - increment
@@ -228,6 +228,8 @@ export function ReviewCarousel() {
               scrollBehavior: "smooth",
               WebkitOverflowScrolling: "touch", // Mejora el desplazamiento en iOS
               transition: "transform 0.5s linear", // Para la animación basada en transform
+              willChange: "transform, scroll-position", // Optimización de rendimiento
+              transform: "translateZ(0)", // Forzar aceleración por hardware
             }}
           >
             {/* Duplicamos las reseñas aleatorizadas para crear el efecto infinito */}

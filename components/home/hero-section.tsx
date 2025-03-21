@@ -103,7 +103,7 @@ export function HeroSection() {
               {/* Corrigiendo la imagen de Discord */}
               <div className="w-full h-[300px] relative mx-auto lg:mx-0">
                 <Image
-                  src="/images/discord-logo-3d.webp"
+                  src="/images/discord-3d-icon.png"
                   alt="Discord community"
                   fill
                   className="rounded-lg object-contain"
