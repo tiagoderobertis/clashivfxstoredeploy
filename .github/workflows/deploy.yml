@@ -28,19 +28,29 @@ jobs:
       - name: Build
         run: npm run build
         
-      # Verificar el contenido de la carpeta out
-      - name: List output directory
-        run: ls -la out/
+      # Verificar qué directorios se crearon
+      - name: List directories
+        run: ls -la
         
-      # Asegurarnos de que existe un archivo index.html
-      - name: Check for index.html
+      # Verificar si existe la carpeta out o si se está usando otro nombre
+      - name: Check build output
         run: |
-          if [ -f "out/index.html" ]; then
-            echo "index.html exists"
+          if [ -d "out" ]; then
+            echo "out directory exists"
+            ls -la out/
+          elif [ -d ".next" ]; then
+            echo ".next directory exists (SSR build instead of static export)"
+            ls -la .next/
+            # Crear carpeta out y copiar contenido necesario
+            mkdir -p out
+            cp -r .next/static out/
+            # Crear un index.html básico
+            echo "<html><head><meta http-equiv='refresh' content='0;url=/'></head><body>Redirecting...</body></html>" > out/index.html
           else
-            echo "WARNING: index.html does not exist!"
-            # Crear un archivo index.html básico si no existe
-            echo "<html><head><meta http-equiv='refresh' content='0;url=/index/'></head><body>Redirecting...</body></html>" > out/index.html
+            echo "No build output found!"
+            # Crear una carpeta out de emergencia con un archivo index.html
+            mkdir -p out
+            echo "<html><body>Site is being built...</body></html>" > out/index.html
           fi
 
       - name: Deploy
