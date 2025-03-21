@@ -27,12 +27,26 @@ jobs:
 
       - name: Build
         run: npm run build
+        
+      # Verificar el contenido de la carpeta out
+      - name: List output directory
+        run: ls -la out/
+        
+      # Asegurarnos de que existe un archivo index.html
+      - name: Check for index.html
+        run: |
+          if [ -f "out/index.html" ]; then
+            echo "index.html exists"
+          else
+            echo "WARNING: index.html does not exist!"
+            # Crear un archivo index.html básico si no existe
+            echo "<html><head><meta http-equiv='refresh' content='0;url=/index/'></head><body>Redirecting...</body></html>" > out/index.html
+          fi
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./out
-          cname: www.clashivfx.store  # Esto creará automáticamente el archivo CNAME
-
+          cname: www.clashivfx.store
 

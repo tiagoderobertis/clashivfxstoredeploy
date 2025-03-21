@@ -20,11 +20,13 @@ const nextConfig = {
     unoptimized: true, // Necesario para exportación estática
   },
   output: 'export', // Genera archivos estáticos en lugar de una aplicación Node.js
-  // Configura la ruta base si tu sitio no está en la raíz del dominio
-  // Por ejemplo, si tu sitio está en username.github.io/repo-name
+  // Eliminar basePath si no es necesario
   // basePath: '/repo-name',
-  // Si estás usando un dominio personalizado, puedes comentar la línea anterior
   trailingSlash: true, // Añade una barra diagonal al final de las URLs para compatibilidad con GitHub Pages
+  // Añadir esta configuración para asegurar que se genere correctamente el archivo 404.html
+  experimental: {
+    appDir: true,
+  },
 }
 
 export default nextConfig
