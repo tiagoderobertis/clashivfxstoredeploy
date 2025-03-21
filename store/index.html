@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ClashiVFX Store - Professional Video Effects</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(to bottom, #000000, #FF7200);
+      color: #FFE8CD;
+      min-height: 100vh;
+    }
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 20px;
+      text-align: center;
+    }
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      color: #FF7200;
+    }
+    p {
+      font-size: 1.2rem;
+      margin-bottom: 2rem;
+      max-width: 600px;
+    }
+    .products {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+      margin-top: 40px;
+      max-width: 1200px;
+    }
+    .product-card {
+      background-color: rgba(0, 0, 0, 0.5);
+      border-radius: 8px;
+      padding: 20px;
+      width: 300px;
+      text-align: left;
+      border: 1px solid rgba(255, 114, 0, 0.3);
+    }
+    .product-card h3 {
+      color: #FF7200;
+      margin-top: 0;
+    }
+    .product-card p {
+      font-size: 0.9rem;
+      margin-bottom: 1rem;
+    }
+    .price {
+      font-size: 1.5rem;
+      font-weight: bold;
+      margin-bottom: 1rem;
+    }
+    .button {
+      display: inline-block;
+      background-color: #FF7200;
+      color: #FFE8CD;
+      padding: 10px 20px;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: all 0.3s ease;
+    }
+    .button:hover {
+      background-color: #FFE8CD;
+      color: #000;
+      box-shadow: 0 0 15px rgba(255, 232, 205, 0.6);
+    }
+    .header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      background-color: rgba(0, 0, 0, 0.8);
+      padding: 15px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 100;
+      border-bottom: 1px solid rgba(255, 114, 0, 0.3);
+    }
+    .logo {
+      color: #FF7200;
+      font-weight: bold;
+      font-size: 1.5rem;
+      text-decoration: none;
+    }
+    .nav {
+      display: flex;
+      gap: 20px;
+    }
+    .nav a {
+      color: #FFE8CD;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+    .nav a:hover {
+      color: #FF7200;
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <a href="/" class="logo">ClashiVFX</a>
+    <nav class="nav">
+      <a href="/">Home</a>
+      <a href="/store/">Store</a>
+      <a href="/community/">Community</a>
+      <a href="/about/">About</a>
+      <a href="/contact/">Contact</a>
+    </nav>
+  </header>
+  <div class="container">
+    <h1>ClashiVFX Store</h1>
+    <p>Browse our collection of professional video effects, presets, and plugins for After Effects.</p>
+    
+    <div class="products">
+      <div class="product-card">
+        <h3>After Effects Shake Presets</h3>
+        <p>Complete package of shake presets for After Effects. Add dynamic movement to your videos with a single click.</p>
+        <div class="price">$19.99</div>
+        <a href="#" class="button">Get Now</a>
+      </div>
+      
+      <div class="product-card">
+        <h3>3D Text Presets</h3>
+        <p>3D text preset package with Element 3D plugin for After Effects. Create stunning 3D text effects easily.</p>
+        <div class="price">$24.99</div>
+        <a href="#" class="button">Get Now</a>
+      </div>
+      
+      <div class="product-card">
+        <h3>Time-Saving Plugins</h3>
+        <p>Exclusive plugins to optimize your editing time. Streamline your workflow and focus on creativity.</p>
+        <div class="price">$29.99</div>
+        <a href="#" class="button">Get Now</a>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
