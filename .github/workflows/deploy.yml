@@ -20,15 +20,15 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: "18"
-          cache: "npm"
+          node-version: '18'
+          cache: 'npm'
 
       - name: Install dependencies
         run: npm ci || npm install --legacy-peer-deps
 
       - name: Build
         run: npm run build
-
+        
       - name: Debug directory structure
         run: |
           echo "Current directory structure:"
@@ -45,16 +45,16 @@ jobs:
             fi
           fi
 
-      - name: Create index.html in root
+      - name: Create necessary files and structure
         run: |
           # Ensure out directory exists
           mkdir -p out
-
+          
           # Create necessary files
           touch out/.nojekyll
           echo www.clashivfx.store > out/CNAME
-
-          # Create a proper index.html in the root
+          
+          # Create a proper index.html in the root that redirects to the actual app
           cat > out/index.html << 'EOL'
           <!DOCTYPE html>
           <html lang="es">
@@ -110,12 +110,12 @@ jobs:
             <div class="container">
               <h1>ClashiVFX</h1>
               <p>Professional effects presets and plugins for After Effects. One-click application to enhance your videos.</p>
-              <a href="/home/" class="button">Enter Site</a>
+              <a href="/app/" class="button">Enter Site</a>
             </div>
           </body>
           </html>
           EOL
-
+          
           # Create a proper 404.html
           cat > out/404.html << 'EOL'
           <!DOCTYPE html>
@@ -176,16 +176,26 @@ jobs:
           </body>
           </html>
           EOL
-
-          # Copy build output if it exists elsewhere
-          if [ -d ".next/static" ]; then
-            mkdir -p out/static
-            cp -r .next/static/* out/static/
+          
+          # Create app directory and copy the Next.js output there
+          mkdir -p out/app
+          
+          # Copy all Next.js generated files to the app directory
+          if [ -d "out" ]; then
+            # If there are files in out (other than the ones we just created)
+            find out -type f -not -path "*/\.*" -not -name "index.html" -not -name "404.html" -not -name "CNAME" -exec cp -r {} out/app/ \;
           fi
-
+          
+          # If .next directory exists, copy its contents to app
+          if [ -d ".next" ]; then
+            cp -r .next/* out/app/
+          fi
+          
           # List files for verification
           echo "Contents of out directory:"
           ls -la out/
+          echo "Contents of out/app directory:"
+          ls -la out/app/ || echo "app directory is empty"
 
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
@@ -193,3 +203,4 @@ jobs:
           folder: out
           branch: gh-pages
           clean: true
+
