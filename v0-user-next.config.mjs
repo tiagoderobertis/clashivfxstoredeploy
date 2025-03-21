@@ -1,28 +1,33 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  reactStrictMode: true,
-  eslint: {
-    // Ignorar errores de ESLint durante la construcción
-    ignoreDuringBuilds: true,
-  },
-  typescript: {
-    // Ignorar errores de TypeScript durante la construcción
-    ignoreBuildErrors: true,
-  },
+  // Configuración optimizada para GitHub Pages
+  output: 'export',
+  // Desactivar la optimización de imágenes para exportación estática
   images: {
-    domains: ['placeholder.com'],
+    unoptimized: true,
     remotePatterns: [
       {
         protocol: 'https',
         hostname: '**',
       },
     ],
-    unoptimized: true, // Necesario para exportación estática
   },
-  // Asegurarnos de que se genere una exportación estática
-  // Para Next.js 13.5.4, podemos usar output: 'export' o el comando next export
-  output: 'export',
-  trailingSlash: true, // Añade una barra diagonal al final de las URLs para compatibilidad con GitHub Pages
+  // Añadir trailing slash para mejor compatibilidad con GitHub Pages
+  trailingSlash: true,
+  // Ignorar errores que puedan interrumpir la compilación
+  typescript: {
+    ignoreBuildErrors: true,
+  },
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
+  // Asegurarse de que las rutas sean compatibles con GitHub Pages
+  assetPrefix: process.env.NODE_ENV === 'production' ? '/' : '',
+  // Desactivar características que no son compatibles con exportación estática
+  experimental: {
+    // Desactivar características experimentales que puedan causar problemas
+    serverActions: false,
+  },
 }
 
 export default nextConfig

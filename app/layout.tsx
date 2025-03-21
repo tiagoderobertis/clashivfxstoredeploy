@@ -27,7 +27,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://clashivfx.com",
+    url: "https://www.clashivfx.store",
     title: SITE_NAME,
     description: SITE_DESCRIPTION,
     siteName: SITE_NAME,
@@ -41,6 +41,8 @@ export const metadata: Metadata = {
   icons: {
     icon: "/favicon.ico",
   },
+  // Añadir base URL para GitHub Pages
+  metadataBase: new URL("https://www.clashivfx.store"),
     generator: 'v0.dev'
 }
 
@@ -49,6 +51,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en">
       <head>
         <link rel="icon" href="/favicon.ico" />
+        {/* Añadir meta tag para evitar problemas de enrutamiento */}
+        <meta name="fragment" content="!" />
       </head>
       <body>{children}</body>
     </html>

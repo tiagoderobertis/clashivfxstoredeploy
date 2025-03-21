@@ -3,10 +3,10 @@ export const SITE_DESCRIPTION = "Professional effects presets and plugins for Af
 
 export const NAVIGATION_ITEMS = [
   { name: "Home", href: "/" },
-  { name: "Store", href: "/store" },
-  { name: "Community", href: "/community" },
-  { name: "About", href: "/about" }, // Corregido para que apunte a /about
-  { name: "Contact", href: "/contact" },
+  { name: "Store", href: "/store/" },
+  { name: "Community", href: "/community/" },
+  { name: "About", href: "/about/" },
+  { name: "Contact", href: "/contact/" },
 ]
 
 export const getProductsBySkillLevel = (skillLevel: string | null) => {
