@@ -20,7 +20,7 @@ const config = {
     },
     extend: {
       screens: {
-        xs: "480px", // Breakpoint personalizado para pantallas extra pequeñas
+        xs: "480px",
       },
       colors: {
         border: "hsl(var(--border))",
@@ -62,7 +62,7 @@ const config = {
           secondary: "#7289DA",
           dark: "#36393F",
           nightBlue: "#0A1929",
-          mediumBlue: "#1A237E", // Azul oscuro pero no tanto como el azul noche
+          mediumBlue: "#1A237E",
         },
       },
       borderRadius: {
