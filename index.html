@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ClashiVFX - Professional Video Effects</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to bottom, #000000, #331500, #0A1929);
+      color: #FFE8CD;
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    header {
+      background-color: #060606;
+      border-bottom: 1px solid rgba(255, 114, 0, 0.2);
+      padding: 16px;
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 100;
+    }
+    .header-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .logo {
+      font-weight: bold;
+      font-size: 1.5rem;
+      color: #FFE8CD;
+      text-decoration: none;
+    }
+    main {
+      flex: 1;
+      padding-top: 80px;
+    }
+    .hero {
+      min-height: calc(100vh - 80px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(to bottom, rgba(0,0,0,0.9), rgba(0,0,0,0.7), transparent);
+      padding: 20px;
+    }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+    .hero-content {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+    @media (min-width: 768px) {
+      .hero-content {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+    .hero-text {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    h1 {
+      font-size: 2.5rem;
+      font-weight: bold;
+      margin-bottom: 16px;
+    }
+    @media (min-width: 640px) {
+      h1 {
+        font-size: 3rem;
+      }
+    }
+    p {
+      color: rgba(255, 232, 205, 0.8);
+      font-size: 1.1rem;
+      margin-bottom: 24px;
+      max-width: 600px;
+    }
+    .button {
+      display: inline-flex;
+      align-items: center;
+      background-color: #FF7200;
+      color: #FFE8CD;
+      padding: 10px 24px;
+      border-radius: 6px;
+      font-weight: 500;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    .button:hover {
+      background-color: #FF8C00;
+      transform: translateY(-2px);
+      box-shadow: 0 10px 20px rgba(255, 114, 0, 0.3);
+    }
+    .video-container {
+      aspect-ratio: 1/1;
+      max-width: 550px;
+      border-radius: 8px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    }
+    footer {
+      background-color: #060606;
+      border-top: 1px solid rgba(255, 114, 0, 0.2);
+      padding: 24px;
+      text-align: center;
+      font-size: 0.875rem;
+      color: rgba(255, 232, 205, 0.8);
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="header-content">
+      <a href="/" class="logo">ClashiVFX</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container">
+        <div class="hero-content">
+          <div class="hero-text">
+            <h1>Optimize Your Video Editing Workflow</h1>
+            <p>Professional effects presets and plugins for After Effects. One-click application to enhance your videos.</p>
+            <div>
+              <a href="https://e08ff1-xx.myshopify.com/" class="button">
+                Shop Now
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-left: 8px;">
+                  <path d="M5 12h14"></path>
+                  <path d="m12 5 7 7-7 7"></path>
+                </svg>
+              </a>
+            </div>
+          </div>
+          <div class="video-container">
+            <iframe 
+              width="100%" 
+              height="100%" 
+              src="https://www.youtube.com/embed/aZVKFvUX1ns?loop=1&playlist=aZVKFvUX1ns&controls=0&disablekb=1&fs=0&modestbranding=1&rel=0&showinfo=0&autoplay=1&mute=1&playsinline=1&iv_load_policy=3&vq=hd1080&enablejsapi=0" 
+              title="Video effects preview" 
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+              allowfullscreen 
+              style="border: none;">
+            </iframe>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2025 ClashiVFX. All rights reserved.</p>
+  </footer>
+</body>
+</html>
