@@ -1,0 +1,482 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 30 100% 98%;
+    --foreground: 30 30% 10%;
+
+    --card: 30 100% 98%;
+    --card-foreground: 30 30% 10%;
+
+    --popover: 30 100% 98%;
+    --popover-foreground: 30 30% 10%;
+
+    --primary: 28 100% 50%;
+    --primary-foreground: 30 80% 90%;
+
+    --secondary: 30 10% 90%;
+    --secondary-foreground: 30 30% 10%;
+
+    --muted: 30 10% 20%;
+    --muted-foreground: 30 80% 90%;
+
+    --accent: 28 100% 50%;
+    --accent-foreground: 30 80% 90%;
+
+    --destructive: 0 100% 50%;
+    --destructive-foreground: 30 80% 90%;
+
+    --border: 30 20% 80%;
+    --input: 30 20% 80%;
+    --ring: 28 100% 50%;
+
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: 30 30% 5%;
+    --foreground: 30 80% 90%;
+
+    --card: 30 30% 5%;
+    --card-foreground: 30 80% 90%;
+
+    --popover: 30 30% 5%;
+    --popover-foreground: 30 80% 90%;
+
+    --primary: 28 100% 50%;
+    --primary-foreground: 30 80% 90%;
+
+    --secondary: 30 30% 15%;
+    --secondary-foreground: 30 80% 90%;
+
+    --muted: 30 30% 15%;
+    --muted-foreground: 30 80% 90%;
+
+    --accent: 28 100% 50%;
+    --accent-foreground: 30 80% 90%;
+
+    --destructive: 0 100% 50%;
+    --destructive-foreground: 30 80% 90%;
+
+    --border: 30 30% 20%;
+    --input: 30 30% 20%;
+    --ring: 28 100% 50%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-cream;
+  }
+
+  /* Asegurar que el scroll sea suave */
+  html {
+    scroll-behavior: smooth;
+    height: 100%;
+  }
+
+  body {
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* Ajustar el contenedor principal para que ocupe todo el alto disponible */
+  main {
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* Asegurar que las secciones se centren verticalmente */
+  section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-primary text-cream hover:bg-primary/90 glow-button;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    transition: color 0.3s ease;
+  }
+
+  .btn-primary::before {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 0;
+    background: #ffe8cd; /* Color crema sólido */
+    transition: height 0.3s ease;
+    z-index: -1;
+  }
+
+  .btn-primary:hover {
+    color: #000; /* Texto negro al hacer hover */
+  }
+
+  .btn-primary:hover::before {
+    height: 100%;
+  }
+
+  /* Animaciones para el selector de fondos de Discord */
+  .discord-selector-button {
+    @apply transition-all duration-300 transform;
+  }
+
+  .discord-selector-button:hover {
+    @apply scale-110;
+  }
+
+  .discord-selector-active {
+    @apply bg-discord-primary text-white;
+  }
+
+  .discord-selector-inactive {
+    @apply bg-discord-dark/80 text-discord-primary hover:bg-discord-dark/60;
+  }
+
+  /* Estilos para las tarjetas de nivel de habilidad */
+  .skill-card {
+    @apply relative overflow-hidden rounded-xl transition-all duration-300;
+  }
+
+  .skill-card-hover {
+    @apply transform scale-[1.02] shadow-lg;
+  }
+
+  .skill-card-badge {
+    @apply absolute top-3 right-3 text-xs font-bold text-white px-2 py-1 rounded-full;
+  }
+
+  .skill-card-icon {
+    @apply p-3 rounded-full mr-3;
+  }
+
+  .skill-card-benefit {
+    @apply flex items-start;
+  }
+
+  .skill-card-benefit-icon {
+    @apply h-4 w-4 text-primary mr-2 mt-0.5 flex-shrink-0;
+  }
+
+  .skill-card-cta {
+    @apply block w-full text-center py-3 px-4 rounded-lg cursor-pointer transition-colors;
+  }
+
+  .skill-card-testimonial {
+    @apply mt-4 bg-black/30 p-3 rounded-lg text-xs italic text-cream/80;
+  }
+}
+
+/* Efecto de glow para botones */
+.glow-button {
+  box-shadow: 0 0 15px rgba(255, 232, 205, 0.4);
+  transition: all 0.3s ease;
+}
+
+.glow-button:hover {
+  box-shadow: 0 0 25px rgba(255, 232, 205, 0.6), 0 0 5px rgba(255, 232, 205, 0.8);
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 15px rgba(255, 232, 205, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 25px rgba(255, 232, 205, 0.6), 0 0 5px rgba(255, 232, 205, 0.8);
+  }
+  100% {
+    box-shadow: 0 0 15px rgba(255, 232, 205, 0.4);
+  }
+}
+
+/* Asegurar que las animaciones de los iconos funcionen correctamente */
+.group:hover .group-hover\:translate-x-1 {
+  transform: translateX(0.25rem);
+}
+
+/* Animación para el menú móvil */
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+header nav a {
+  transition: background-color 0.2s ease;
+}
+
+@media (max-width: 768px) {
+  header > div:last-child {
+    animation: slideDown 0.3s ease forwards;
+  }
+}
+
+/* Contenedor centrado verticalmente */
+.container {
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Ajustes para pantallas grandes */
+@media (min-width: 1280px) {
+  .container {
+    max-width: 1200px;
+  }
+}
+
+/* Animaciones para el selector de fondos de Discord */
+@keyframes floatButton {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+.discord-selector-float {
+  animation: floatButton 3s ease-in-out infinite;
+}
+
+/* Modern background selector styles */
+.backdrop-blur-md {
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+/* Smooth transitions for background selector */
+.bg-discord-primary,
+.text-discord-primary {
+  transition: all 0.2s ease;
+}
+
+/* Animación de flotación para elementos de fondo */
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0) translateX(0);
+  }
+  25% {
+    transform: translateY(-15px) translateX(15px);
+  }
+  50% {
+    transform: translateY(-25px) translateX(0);
+  }
+  75% {
+    transform: translateY(-15px) translateX(-15px);
+  }
+}
+
+/* Ocultar la barra de desplazamiento pero mantener la funcionalidad */
+.scrollbar-hide {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none; /* Chrome, Safari and Opera */
+}
+
+/* Añadir después de las animaciones existentes */
+
+@keyframes pulse-slow {
+  0%,
+  100% {
+    opacity: 1;
+    text-shadow: 0 0 15px rgba(255, 114, 0, 0.5);
+  }
+  50% {
+    opacity: 0.9;
+    text-shadow: 0 0 25px rgba(255, 114, 0, 0.8), 0 0 5px rgba(255, 114, 0, 0.4);
+  }
+}
+
+@keyframes gradient-x {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.animate-pulse-slow {
+  animation: pulse-slow 3s infinite;
+}
+
+.animate-gradient-x {
+  background-size: 200% 200%;
+  animation: gradient-x 15s ease infinite;
+}
+
+.glow-text {
+  text-shadow: 0 0 15px rgba(255, 114, 0, 0.6);
+}
+
+/* Nuevos estilos para el efecto neón, marquee y botón moderno */
+
+/* Reemplazar el estilo neon-text y animate-neon con un estilo más sutil y moderno */
+
+.modern-glow {
+  color: #fff;
+  text-shadow: 0 0 1px rgba(255, 255, 255, 0.5), 0 0 10px rgba(255, 114, 0, 0.3), 0 0 20px rgba(255, 114, 0, 0.2);
+  background: linear-gradient(to right, #ffffff, #ff7200, #ffffff);
+  background-size: 200% auto;
+  background-clip: text;
+  -webkit-background-clip: text;
+  animation: subtle-glow 3s ease-in-out infinite alternate;
+}
+
+@keyframes subtle-glow {
+  0% {
+    text-shadow: 0 0 1px rgba(255, 255, 255, 0.5), 0 0 10px rgba(255, 114, 0, 0.3), 0 0 20px rgba(255, 114, 0, 0.2);
+  }
+  100% {
+    text-shadow: 0 0 2px rgba(255, 255, 255, 0.7), 0 0 15px rgba(255, 114, 0, 0.5), 0 0 30px rgba(255, 114, 0, 0.3);
+  }
+}
+
+/* Botón moderno y llamativo */
+.modern-button {
+  position: relative;
+  padding: 1.5rem 3rem;
+  background: linear-gradient(45deg, #ff0000, #ff5e00);
+  border: none;
+  border-radius: 50px;
+  color: white;
+  font-size: 1.25rem;
+  font-weight: bold;
+  cursor: pointer;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  box-shadow: 0 10px 20px rgba(255, 0, 0, 0.3);
+  transform: translateY(0);
+}
+
+.modern-button:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: all 0.5s ease;
+}
+
+.modern-button:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 25px rgba(255, 0, 0, 0.4);
+}
+
+.modern-button:hover:before {
+  left: 100%;
+}
+
+.button-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 1;
+}
+
+/* Animación de relleno para el botón "Comprar Ahora" */
+.shop-now-button {
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  transition: color 0.3s ease;
+}
+
+.shop-now-button::before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 0;
+  background: #ffe8cd; /* Color crema sólido */
+  transition: height 0.3s ease;
+  z-index: -1;
+}
+
+.shop-now-button:hover {
+  color: #000; /* Texto negro al hacer hover */
+}
+
+.shop-now-button:hover::before {
+  height: 100%;
+}
+
+/* Estilos para el contenedor de YouTube para solucionar problemas de scroll en iOS */
+.youtube-container {
+  position: relative;
+  pointer-events: none; /* Deshabilita eventos de puntero en el contenedor */
+}
+
+.youtube-container iframe {
+  pointer-events: auto; /* Habilita eventos solo en el iframe */
+}
+
+@media (max-width: 768px) {
+  .youtube-container::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 10;
+    pointer-events: none; /* Capa transparente que no interfiere con el scroll */
+  }
+}
+
+/* Mejoras para desplazamiento en iOS */
+@supports (-webkit-touch-callout: none) {
+  /* Estilos específicos para iOS */
+  .scrollbar-hide {
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+  }
+
+  /* Asegurar que los elementos del carrusel tengan un tamaño mínimo para scroll snap */
+  .scrollbar-hide > * {
+    scroll-snap-align: start;
+    flex-shrink: 0;
+  }
+}
+
+/* Optimizaciones de rendimiento para animaciones */
+.scrollbar-hide {
+  will-change: transform, scroll-position;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
