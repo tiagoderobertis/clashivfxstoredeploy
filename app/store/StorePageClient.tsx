@@ -4,7 +4,6 @@ import { useState } from "react"
 import { SkillLevelSelector } from "@/components/store/skill-level-selector"
 import { AdvancedPackCard } from "@/components/store/advanced-pack-card"
 import { NovicePackCard } from "@/components/store/novice-pack-card"
-import { TrainingPackCard } from "@/components/store/training-pack-card"
 import type { SkillLevel } from "@/types"
 // Importaciones existentes
 
@@ -31,8 +30,6 @@ export default function StorePageClient() {
               <AdvancedPackCard setSkillLevel={handleChangeSkillLevel} />
             ) : skillLevel === "novice" ? (
               <NovicePackCard setSkillLevel={handleChangeSkillLevel} />
-            ) : skillLevel === "training" ? (
-              <TrainingPackCard setSkillLevel={handleChangeSkillLevel} />
             ) : (
               // Fallback a novice si por alguna razón no hay nivel seleccionado
               <NovicePackCard setSkillLevel={handleChangeSkillLevel} />
@@ -44,4 +41,3 @@ export default function StorePageClient() {
     </section>
   )
 }
-
