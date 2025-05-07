@@ -40,7 +40,7 @@ export function SkillLevelSelector({ skillLevel, setSkillLevel, onSubmit }: Skil
     transform hover:scale-105 hover:shadow-lg flex items-center justify-center`
 
   const goToShopify = () => {
-    window.open("https://www.example.com", "_blank")
+    window.location.href = "https://e08ff1-xx.myshopify.com/collections/all"
   }
 
   return (
