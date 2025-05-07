@@ -202,5 +202,3 @@ export function SkillLevelSelector({ skillLevel, setSkillLevel, onSubmit }: Skil
     </div>
   )
 }
-
-
