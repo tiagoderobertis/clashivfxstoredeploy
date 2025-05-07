@@ -117,12 +117,6 @@ export function AdvancedPackCard({ setSkillLevel }: AdvancedPackCardProps) {
                     >
                       {t("store.skillLevel.advanced.title")}
                     </button>
-                    <button
-                      onClick={() => setSkillLevel("training")}
-                      className="flex items-center gap-2 px-4 py-2 text-sm w-full text-left hover:bg-[#1A1A1A] text-cream"
-                    >
-                      {t("store.skillLevel.training.title")}
-                    </button>
                   </div>
                 </div>
               )}
@@ -177,4 +171,3 @@ export function AdvancedPackCard({ setSkillLevel }: AdvancedPackCardProps) {
     </div>
   )
 }
-
