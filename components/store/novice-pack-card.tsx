@@ -59,7 +59,7 @@ export function NovicePackCard({ setSkillLevel }: NovicePackCardProps) {
   // Función para mostrar el precio con formato personalizado
   const getFormattedPrice = () => {
     if (currency === "ARS") {
-      return "ARS $4999"
+      return "ARS $6499"
     } else {
       return "$4.99"
     }
@@ -68,7 +68,7 @@ export function NovicePackCard({ setSkillLevel }: NovicePackCardProps) {
   // Función para mostrar el precio original tachado
   const getOriginalPrice = () => {
     if (currency === "ARS") {
-      return "ARS $9998"
+      return "ARS $12998"
     } else {
       return "$9.98"
     }
