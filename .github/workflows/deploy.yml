@@ -1,201 +1,179 @@
 name: Deploy to GitHub Pages
 
 on:
-push:
- branches: [main]
-workflow_dispatch:
+  push:
+    branches: [main]
+  workflow_dispatch:
 
 permissions:
-contents: write
-pages: write
-id-token: write
+  contents: write
+  pages: write
+  id-token: write
 
 jobs:
-build-and-deploy:
- runs-on: ubuntu-latest
- steps:
-   - name: Checkout
-     uses: actions/checkout@v3
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
 
-   - name: Setup Node.js
-     uses: actions/setup-node@v3
-     with:
-       node-version: '18'
-       cache: 'npm'
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+          cache: 'npm'
 
-   - name: Install dependencies
-     run: npm ci || npm install --legacy-peer-deps
+      - name: Install dependencies
+        run: npm ci || npm install --legacy-peer-deps
 
-   - name: Build
-     run: npm run build
-     
-   - name: Debug directory structure
-     run: |
-       echo "Current directory structure:"
-       ls -la
-       echo "Checking for out directory:"
-       if [ -d "out" ]; then
-         echo "out directory exists"
-         ls -la out/
-       else
-         echo "out directory does not exist"
-         if [ -d ".next" ]; then
-           echo ".next directory exists"
-           ls -la .next/
-         fi
-       fi
+      - name: Build
+        run: npm run build
+        
+      - name: Debug directory structure
+        run: |
+          echo "Current directory structure:"
+          ls -la
+          echo "Checking for out directory:"
+          if [ -d "out" ]; then
+            echo "out directory exists"
+            ls -la out/
+          else
+            echo "out directory does not exist"
+            if [ -d ".next" ]; then
+              echo ".next directory exists"
+              ls -la .next/
+            fi
+          fi
 
-   - name: Create redirects and necessary files
-     run: |
-       # Ensure out directory exists
-       mkdir -p out
-       mkdir -p out/store
-       
-       # Create necessary files
-       touch out/.nojekyll
-       echo www.clashivfx.store > out/CNAME
-       
-       # Asegúrate de que index.html esté en la raíz
-       if [ ! -f "out/index.html" ]; then
-         echo "index.html no encontrado, copiando desde app/index.html si existe"
-         if [ -f "app/index.html" ]; then
-           cp app/index.html out/index.html
-         else
-           echo "Creando index.html básico"
-           cat > out/index.html << 'EOL'
-           <!DOCTYPE html>
-           <html lang="es">
-           <head>
-             <meta charset="UTF-8">
-             <meta name="viewport" content="width=device-width, initial-scale=1.0">
-             <meta http-equiv="refresh" content="0;url=/">
-             <title>ClashiVFX</title>
-           </head>
-           <body>
-             <p>Redirigiendo...</p>
-             <script>
-               window.location.href = '/';
-             </script>
-           </body>
-           </html>
-           EOL
-         fi
-       fi
-       
-       # Create store/index.html that redirects to the root (/)
-       cat > out/store/index.html << 'EOL'
-       <!DOCTYPE html>
-       <html lang="es">
-       <head>
-         <meta charset="UTF-8">
-         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-         <meta http-equiv="refresh" content="0;url=/">
-         <title>ClashiVFX - Redirigiendo...</title>
-         <style>
-           body {
-             font-family: Arial, sans-serif;
-             margin: 0;
-             padding: 0;
-             display: flex;
-             justify-content: center;
-             align-items: center;
-             min-height: 100vh;
-             background-color: #000;
-             color: #FFE8CD;
-           }
-           .container {
-             text-align: center;
-             padding: 2rem;
-           }
-           h1 {
-             font-size: 2rem;
-             margin-bottom: 1rem;
-           }
-           p {
-             margin-bottom: 2rem;
-           }
-         </style>
-       </head>
-       <body>
-       <div class="container">
-         <h1>ClashiVFX</h1>
-         <p>Redirigiendo a la página principal...</p>
-       </div>
-       </body>
-       </html>
-       EOL
-       
-       # Create a proper 404.html
-       cat > out/404.html << 'EOL'
-       <!DOCTYPE html>
-       <html lang="es">
-       <head>
-         <meta charset="UTF-8">
-         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-         <title>404 - Página No Encontrada | ClashiVFX</title>
-         <style>
-           body {
-             font-family: Arial, sans-serif;
-             margin: 0;
-             padding: 0;
-             display: flex;
-             justify-content: center;
-             align-items: center;
-             min-height: 100vh;
-             background: linear-gradient(to bottom, #000000, #FF7200);
-             color: #FFE8CD;
-           }
-           .container {
-             text-align: center;
-             padding: 2rem;
-             max-width: 600px;
-           }
-           h1 {
-             font-size: 3rem;
-             margin-bottom: 1rem;
-           }
-           p {
-             font-size: 1.2rem;
-             margin-bottom: 2rem;
-             opacity: 0.8;
-           }
-           a {
-             display: inline-block;
-             background-color: #FF7200;
-             color: #FFE8CD;
-             padding: 0.75rem 1.5rem;
-             border-radius: 0.375rem;
-             text-decoration: none;
-             font-weight: bold;
-             transition: all 0.3s ease;
-           }
-           a:hover {
-             background-color: #FFE8CD;
-             color: #000;
-             box-shadow: 0 0 15px rgba(255, 232, 205, 0.6);
-           }
-         </style>
-       </head>
-       <body>
-         <div class="container">
-           <h1>404 - Página No Encontrada</h1>
-           <p>La página que estás buscando no existe o ha sido movida.</p>
-           <a href="/">Volver al Inicio</a>
-         </div>
-       </body>
-       </html>
-       EOL
+      - name: Create redirects and necessary files
+        run: |
+          # Ensure out directory exists
+          mkdir -p out
+          mkdir -p out/store
+          
+          # Create necessary files
+          touch out/.nojekyll
+          echo www.clashivfx.store > out/CNAME
+          
+          # Create index.html in root if it doesn't exist
+          if [ ! -f "out/index.html" ]; then
+            echo "Creating index.html in root"
+            cp out/app/page.html out/index.html 2>/dev/null || echo "Failed to copy page.html"
+          fi
+          
+          # Create store/index.html that redirects to the root (/)
+          cat > out/store/index.html << 'EOL'
+          <!DOCTYPE html>
+          <html lang="es">
+          <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <meta http-equiv="refresh" content="0;url=/">
+            <title>ClashiVFX - Redirigiendo...</title>
+            <style>
+              body {
+                font-family: Arial, sans-serif;
+                margin: 0;
+                padding: 0;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                min-height: 100vh;
+                background-color: #000;
+                color: #FFE8CD;
+              }
+              .container {
+                text-align: center;
+                padding: 2rem;
+              }
+              h1 {
+                font-size: 2rem;
+                margin-bottom: 1rem;
+              }
+              p {
+                margin-bottom: 2rem;
+              }
+            </style>
+          </head>
+          <body>
+          <div class="container">
+            <h1>ClashiVFX</h1>
+            <p>Redirigiendo a la página principal...</p>
+          </div>
+          </body>
+          </html>
+          EOL
+          
+          # Create a proper 404.html
+          cat > out/404.html << 'EOL'
+          <!DOCTYPE html>
+          <html lang="es">
+          <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>404 - Página No Encontrada | ClashiVFX</title>
+            <style>
+              body {
+                font-family: Arial, sans-serif;
+                margin: 0;
+                padding: 0;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                min-height: 100vh;
+                background: linear-gradient(to bottom, #000000, #FF7200);
+                color: #FFE8CD;
+              }
+              .container {
+                text-align: center;
+                padding: 2rem;
+                max-width: 600px;
+              }
+              h1 {
+                font-size: 3rem;
+                margin-bottom: 1rem;
+              }
+              p {
+                font-size: 1.2rem;
+                margin-bottom: 2rem;
+                opacity: 0.8;
+              }
+              a {
+                display: inline-block;
+                background-color: #FF7200;
+                color: #FFE8CD;
+                padding: 0.75rem 1.5rem;
+                border-radius: 0.375rem;
+                text-decoration: none;
+                font-weight: bold;
+                transition: all 0.3s ease;
+              }
+              a:hover {
+                background-color: #FFE8CD;
+                color: #000;
+                box-shadow: 0 0 15px rgba(255, 232, 205, 0.6);
+              }
+            </style>
+          </head>
+          <body>
+            <div class="container">
+              <h1>404 - Página No Encontrada</h1>
+              <p>La página que estás buscando no existe o ha sido movida.</p>
+              <a href="/">Volver al Inicio</a>
+            </div>
+          </body>
+          </html>
+          EOL
 
-       # Copy Next.js generated files if they exist
-       if [ -d ".next/static" ]; then
-         mkdir -p out/_next/static
-         cp -R .next/static/* out/_next/static/
-       fi
+          # Copy Next.js generated files if they exist
+          if [ -d ".next/static" ]; then
+            mkdir -p out/_next/static
+            cp -R .next/static/* out/_next/static/
+          fi
 
-   - name: Deploy to GitHub Pages
-     uses: JamesIves/github-pages-deploy-action@v4
-     with:
-       folder: out
-       branch: gh-pages
-       clean: true
-
+      - name: Deploy to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: out
+          branch: gh-pages
+          clean: true
