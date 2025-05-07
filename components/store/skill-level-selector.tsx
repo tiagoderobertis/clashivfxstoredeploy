@@ -1,6 +1,6 @@
 "use client"
 
-import { Rocket, FlameIcon as Fire, Check } from "lucide-react"
+import { Rocket, FlameIcon as Fire, ShoppingCart, Check } from "lucide-react"
 import type { SkillLevel } from "@/types"
 import { useTranslation } from "@/lib/i18n/use-translation"
 import { useState } from "react"
@@ -39,9 +39,13 @@ export function SkillLevelSelector({ skillLevel, setSkillLevel, onSubmit }: Skil
   const buttonClass = `w-full h-12 py-3 px-4 rounded-lg cursor-pointer transition-all text-white font-medium
     transform hover:scale-105 hover:shadow-lg flex items-center justify-center`
 
+  const goToShopify = () => {
+    window.open("https://www.example.com", "_blank")
+  }
+
   return (
     <div className="mx-auto max-w-4xl">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {/* TARJETA PRINCIPIANTE */}
         <div
           className={`relative overflow-hidden rounded-xl transition-all duration-300 flex flex-col h-full ${
@@ -129,6 +133,66 @@ export function SkillLevelSelector({ skillLevel, setSkillLevel, onSubmit }: Skil
                 className={`${buttonClass} bg-gradient-to-r from-orange-500 to-red-600 hover:from-orange-600 hover:to-red-700`}
               >
                 {t("store.skillLevel.advanced.cta")}
+              </button>
+            </div>
+          </div>
+        </div>
+
+        {/* TARJETA VISITA MI TIENDA */}
+        <div
+          className={`relative overflow-hidden rounded-xl transition-all duration-300 flex flex-col h-full 
+  border border-teal-500/30 ${hoveredCard === "shop" ? "transform scale-[1.02] shadow-lg shadow-teal-500/30" : ""} hover:border-teal-500/70`}
+          onMouseEnter={() => setHoveredCard("shop" as any)}
+          onMouseLeave={() => setHoveredCard(null)}
+        >
+          {/* Fondo con gradiente */}
+          <div className="absolute inset-0 bg-gradient-to-b from-[#004D40]/40 to-[#00695C]/80 opacity-80"></div>
+
+          <div className="relative p-6 flex-1 flex flex-col">
+            {/* Icono y título */}
+            <div className="flex items-center mb-4">
+              <div className="bg-teal-600 p-3 rounded-full mr-3">
+                <ShoppingCart className="h-6 w-6 text-white" />
+              </div>
+              <h3 className="text-xl font-bold text-cream">Visita mi Tienda</h3>
+            </div>
+
+            <p className="text-sm text-cream/80 mb-4">
+              Explora todos los packs disponibles, proyectos de After Effects y recursos premium en nuestra tienda
+              online. Encuentra exactamente lo que necesitas para elevar tus ediciones al siguiente nivel.
+            </p>
+
+            <div className="flex-1">
+              <ul className="mt-3 space-y-1">
+                <li className="flex items-start">
+                  <Check className="h-4 w-4 text-teal-400 mr-2 mt-0.5 flex-shrink-0" />
+                  <span className="text-xs text-cream/90">Packs de efectos para todos los niveles</span>
+                </li>
+                <li className="flex items-start">
+                  <Check className="h-4 w-4 text-teal-400 mr-2 mt-0.5 flex-shrink-0" />
+                  <span className="text-xs text-cream/90">Proyectos completos de After Effects</span>
+                </li>
+                <li className="flex items-start">
+                  <Check className="h-4 w-4 text-teal-400 mr-2 mt-0.5 flex-shrink-0" />
+                  <span className="text-xs text-cream/90">Recursos premium para editores</span>
+                </li>
+                <li className="flex items-start">
+                  <Check className="h-4 w-4 text-teal-400 mr-2 mt-0.5 flex-shrink-0" />
+                  <span className="text-xs text-cream/90">Proceso de compra fácil y seguro</span>
+                </li>
+                <li className="flex items-start">
+                  <Check className="h-4 w-4 text-teal-400 mr-2 mt-0.5 flex-shrink-0" />
+                  <span className="text-xs text-cream/90">Soporte técnico incluido</span>
+                </li>
+              </ul>
+            </div>
+
+            <div className="mt-auto pt-6">
+              <button
+                onClick={goToShopify}
+                className={`${buttonClass} bg-gradient-to-r from-teal-500 to-emerald-600 hover:from-teal-600 hover:to-emerald-700`}
+              >
+                Ver Todos los Productos
               </button>
             </div>
           </div>
