@@ -64,7 +64,7 @@ export function AdvancedPackCard({ setSkillLevel }: AdvancedPackCardProps) {
   // Función para mostrar el precio con formato personalizado
   const getFormattedPrice = () => {
     if (currency === "ARS") {
-      return "ARS $19.999"
+      return "ARS $24999"
     } else {
       return "$19.99"
     }
@@ -155,7 +155,7 @@ export function AdvancedPackCard({ setSkillLevel }: AdvancedPackCardProps) {
                 <div className="flex flex-col">
                   <div className="text-xl font-bold text-cream">{getFormattedPrice()}</div>
                   <div className="text-sm text-cream/60 line-through">
-                    {currency === "ARS" ? "ARS $80.000" : "$80.00"}
+                    {currency === "ARS" ? "ARS $99999" : "$80.00"}
                   </div>
                 </div>
                 <Button onClick={handleBuyNow} className="btn-primary group">
